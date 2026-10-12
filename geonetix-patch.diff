@@ -1,0 +1,77 @@
+diff --git a/.env.example b/.env.example
+index d06ef1e..9e9d4af 100644
+--- a/.env.example
++++ b/.env.example
+@@ -12,3 +12,18 @@ GEONETIX_BROWSER_WORKER_ENABLED=0
+ GEONETIX_BROWSER_WORKER_TIMEOUT_MS=45000
+ GEONETIX_BROWSER_NO_SANDBOX=0
+ GEONETIX_LIVE_CARD_CACHE_TTL_SECONDS=900
++
++# Shared Claude API key used for the AI-assist cabinet endpoint. Can instead
++# be set via POST /admin/settings (that value wins if both are present).
++# Get a key from https://console.anthropic.com/ and a current model id from
++# https://docs.claude.com/en/docs/about-claude/models (do not guess one).
++CLAUDE_API_KEY=
++CLAUDE_MODEL=
++
++# Bearer token required by /admin/settings. Generate a long random value
++# (e.g. `openssl rand -hex 32`); leave unset to disable the admin panel.
++ADMIN_TOKEN=
++
++# Optional: enables POST .../organizations/lookup (company search by name/INN).
++# Get a key from https://dadata.ru/.
++DADATA_API_KEY=
+diff --git a/Cargo.toml b/Cargo.toml
+index 777c975..c304ea0 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -38,7 +38,7 @@ sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "macro
+ tokio = { version = "1.48", features = ["full"] }
+ serde = { version = "1", features = ["derive"] }
+ redis = { version = "0.27", default-features = false, features = ["tokio-comp", "connection-manager"] }
+-reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "cookies"] }
++reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "cookies", "json"] }
+ url = "2.5"
+ uuid = { version = "1", features = ["serde", "v4"] }
+ 
+diff --git a/src/main.rs b/src/main.rs
+index c97ac0f..40f0dcd 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -1,11 +1,16 @@
+ #[path = "../content/mod.rs"]
+ mod content;
+ 
++mod admin;
++mod ai_assist;
+ mod analysis;
++mod claude_client;
+ mod db;
+ mod handlers;
+ mod models;
++mod organizations;
+ mod pages;
++mod settings;
+ mod utils;
+ 
+ use anyhow::Context;
+@@ -141,6 +146,19 @@ async fn main() -> anyhow::Result<()> {
+             get(analysis_status_page),
+         )
+         .route("/health", get(health))
++        .route(
++            "/cabinet/{user_id}/organizations/search",
++            get(organizations::search_own_organizations),
++        )
++        .route(
++            "/organizations/lookup",
++            get(organizations::lookup_external_organizations),
++        )
++        .route("/cabinet/{user_id}/ai/ask", axum::routing::post(ai_assist::ask_ai_assistant))
++        .route(
++            "/admin/settings",
++            get(admin::get_admin_settings).post(admin::update_admin_settings),
++        )
+         .with_state(state);
+ 
+     let address = SocketAddr::from(([0, 0, 0, 0], 8080));
