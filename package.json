@@ -1,0 +1,13 @@
+{
+  "name": "geonetix-browser-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "browser-worker:check": "node --check workers/yandex_browser_worker.mjs",
+    "ui-test": "node ui-tests/runner.mjs",
+    "ui-test:check": "node --check ui-tests/runner.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.60.0"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "subscription_actions",
+  "description": "Регистрация пользователя и подключение платного пакета PRO 3 через модуль 13 (тестовый контур оплаты).",
+  "vars": {},
+  "steps": [
+    {
+      "name": "Зарегистрировать пользователя",
+      "action": "fill_form",
+      "path": "/register",
+      "fields": {
+        "full_name": "{{random.full_name}}",
+        "phone": "{{random.phone}}",
+        "telegram_handle": "{{random.telegram}}",
+        "email": "{{random.email}}",
+        "password": "{{random.password}}"
+      },
+      "expect_status": 303,
+      "expect_redirect_contains": "/register/success/",
+      "capture": {
+        "user_id": "/register/success/"
+      }
+    },
+    {
+      "name": "Открыть управление подпиской",
+      "action": "navigate",
+      "path": "/cabinet/{{user_id}}/subscription",
+      "expect_status": 200,
+      "expect_text": ["Модуль 13", "Управление подпиской в личном кабинете", "Подключить PRO 3"]
+    },
+    {
+      "name": "Нажать «Подключить PRO 3»",
+      "action": "fill_form",
+      "path": "/cabinet/{{user_id}}/subscription",
+      "fields": {
+        "action": "change_to_pro_3"
+      },
+      "expect_status": 200,
+      "expect_text": ["Тариф изменён", "Теперь у пользователя пакет PRO 3 с обновлённым лимитом анализов"]
+    }
+  ]
+}

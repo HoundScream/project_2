@@ -1,0 +1,18 @@
+[Unit]
+Description=Geonetix Production Stack
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/geonetix
+EnvironmentFile=/opt/geonetix/.env
+ExecStart=/usr/bin/docker compose -f /opt/geonetix/deploy/docker-compose.prod.yml --env-file /opt/geonetix/.env up -d --build --remove-orphans app redis caddy
+ExecStop=/usr/bin/docker compose -f /opt/geonetix/deploy/docker-compose.prod.yml --env-file /opt/geonetix/.env stop app redis caddy
+ExecReload=/usr/bin/docker compose -f /opt/geonetix/deploy/docker-compose.prod.yml --env-file /opt/geonetix/.env up -d --build --remove-orphans app redis caddy
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target

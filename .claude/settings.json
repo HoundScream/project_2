@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(timeout 8 curl -sI https://docs.rs/redis/0.27.0/redis/)",
+      "Bash(timeout 15 curl -s \"https://docs.rs/redis/0.27.0/redis/trait.AsyncCommands.html\")"
+    ]
+  }
+}

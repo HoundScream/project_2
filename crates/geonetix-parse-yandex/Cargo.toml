@@ -1,0 +1,10 @@
+[package]
+name = "geonetix-parse-yandex"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+geonetix-core = { path = "../geonetix-core" }
+geonetix-parse-jsonld = { path = "../geonetix-parse-jsonld" }
+scraper = "0.24"
+serde_json = "1"

@@ -1,0 +1,9 @@
+[package]
+name = "geonetix-parse-jsonld"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+geonetix-core = { path = "../geonetix-core" }
+scraper = "0.24"
+serde_json = "1"

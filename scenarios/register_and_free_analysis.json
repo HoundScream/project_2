@@ -1,0 +1,61 @@
+{
+  "name": "register_and_free_analysis",
+  "description": "Регистрация нового пользователя и запуск бесплатного анализа реальной карточки бизнеса до готового отчёта.",
+  "vars": {
+    "card_url": "https://yandex.ru/maps/org/hookahplace_akari/25558422006/"
+  },
+  "steps": [
+    {
+      "name": "Открыть главную страницу",
+      "action": "navigate",
+      "path": "/",
+      "expect_status": 200
+    },
+    {
+      "name": "Зарегистрировать нового пользователя",
+      "action": "fill_form",
+      "path": "/register",
+      "fields": {
+        "full_name": "{{random.full_name}}",
+        "phone": "{{random.phone}}",
+        "telegram_handle": "{{random.telegram}}",
+        "email": "{{random.email}}",
+        "password": "{{random.password}}"
+      },
+      "expect_status": 303,
+      "expect_redirect_contains": "/register/success/",
+      "capture": {
+        "user_id": "/register/success/"
+      }
+    },
+    {
+      "name": "Открыть бесплатный кабинет",
+      "action": "navigate",
+      "path": "/cabinet/{{user_id}}",
+      "expect_status": 200,
+      "expect_text": ["Бесплатный кабинет Geonetix", "Запустить бесплатный анализ"]
+    },
+    {
+      "name": "Отправить ссылку на реальную карточку бизнеса",
+      "action": "fill_form",
+      "path": "/cabinet/{{user_id}}",
+      "fields": {
+        "source_url": "{{card_url}}"
+      },
+      "expect_status": 303,
+      "expect_redirect_contains": "/analysis/",
+      "capture": {
+        "request_id": "/analysis/"
+      }
+    },
+    {
+      "name": "Дождаться завершения фонового анализа",
+      "action": "wait_for_text",
+      "path": "/cabinet/{{user_id}}/analysis/{{request_id}}",
+      "text": "Анализ завершён",
+      "timeout_ms": 10000,
+      "poll_ms": 400,
+      "expect_text": ["Базовая оценка собрана", "Краткое резюме", "Сильные стороны"]
+    }
+  ]
+}

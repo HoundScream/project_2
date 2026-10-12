@@ -1,0 +1,5 @@
+{$SERVER_NAME} {
+    encode zstd gzip
+
+    reverse_proxy {$APP_UPSTREAM}
+}

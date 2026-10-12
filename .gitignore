@@ -1,0 +1,24 @@
+/target
+/.env
+/.idea
+/.vscode
+
+# Node
+/node_modules
+
+# Runtime output: generated module 9 PDFs
+/storage
+
+# Generated visual artifacts. Specs stay tracked:
+#   artifacts/site-architecture.md
+#   artifacts/Geonetix_Модули_и_тексты_сайта.docx
+artifacts/site-screenshots/
+artifacts/site-snapshots/
+
+# Local agent tooling. Project-level .claude/settings.json stays tracked.
+/.claude/settings.local.json
+/.claude/worktrees/
+/.claude/scheduled_tasks.*
+
+*.log
+.DS_Store

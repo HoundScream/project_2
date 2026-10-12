@@ -1,0 +1,10 @@
+[toolchain]
+# Pinned exactly, not "stable".
+# - 1.87 (used by Dockerfile until now) cannot build the dependency tree:
+#   cookie_store, home and time all require rustc >= 1.88.
+# - 1.94 and 1.95 ICE in rustc/clippy on this crate
+#   ("early_lint_checks" panic in slice::index), so CI could not run clippy.
+# 1.92 is the newest verified-good: check --all-targets and clippy are clean.
+channel = "1.92"
+components = ["clippy", "rustfmt"]
+

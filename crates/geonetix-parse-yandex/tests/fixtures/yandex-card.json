@@ -1,0 +1,571 @@
+{
+  "stack": [
+    {
+      "mode": "orgpage",
+      "results": {
+        "items": [
+          {
+            "type": "business",
+            "title": "HookahPlace Akari",
+            "shortTitle": "HookahPlace Akari",
+            "seoname": "hookahplace_akari",
+            "fullAddress": "Москва, Большой Овчинниковский переулок, 16",
+            "address": "Большой Овчинниковский пер., 16, Москва",
+            "description": "Большой Овчинниковский пер., 16, Москва",
+            "additionalAddress": "вход с фудкорта, и отдельный вход с улицы - с торца, ТЦ, этаж 2",
+            "workingTimeText": "ежедневно, 11:00–02:00",
+            "currentWorkingStatus": {
+              "isOpenNow": true,
+              "text": "Открыто до 02:00",
+              "shortText": "До 02:00",
+              "tag": []
+            },
+            "ratingData": {
+              "ratingCount": 185,
+              "ratingValue": 5,
+              "reviewCount": 150
+            },
+            "photos": {
+              "count": 183
+            },
+            "categories": [
+              {
+                "id": "34866769160",
+                "name": "Кальян-бар",
+                "class": "bars",
+                "seoname": "hookah_lounge",
+                "pluralName": "Кальян-бары"
+              }
+            ],
+            "socialLinks": [
+              {
+                "type": "telegram",
+                "href": "https://t.me/+9sKpMGy9LhFmMDli"
+              },
+              {
+                "type": "vkontakte",
+                "href": "https://vk.ru/hookahplace_akari"
+              }
+            ],
+            "businessLinks": [
+              {
+                "type": "booking",
+                "href": "https://yandex.ru/web-maps/webview?booking[permalink]=25558422006\u0026booking[standalone]=true\u0026mode=booking\u0026source=partner-cta"
+              }
+            ],
+            "urls": [
+              "https://hookahplace.ru/",
+              "https://hp-akari.ru/"
+            ],
+            "sources": [
+              {
+                "name": "Яндекс",
+                "href": "https://ya.ru/"
+              }
+            ],
+            "phones": [
+              {
+                "type": "phone",
+                "number": "+7 (993) 596-96-69",
+                "value": "+79935969669"
+              }
+            ],
+            "features": [
+              {
+                "id": "takeaway",
+                "name": "еда навынос",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "Possible_with_dog",
+                "name": "Можно с собакой",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "non_cash_tips",
+                "name": "типы безналичных чаевых",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "sbertips",
+                    "name": "SberTips"
+                  }
+                ]
+              },
+              {
+                "id": "sobytiya",
+                "name": "События",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "for_business_meetings",
+                    "name": "Деловая встреча"
+                  },
+                  {
+                    "id": "for_birthday_party",
+                    "name": "День Рождения"
+                  },
+                  {
+                    "id": "for_date",
+                    "name": "Свидание"
+                  },
+                  {
+                    "id": "for_corporate_party",
+                    "name": "Корпоратив"
+                  },
+                  {
+                    "id": "for_banquet",
+                    "name": "Банкет"
+                  },
+                  {
+                    "id": "for_marriage",
+                    "name": "Свадьба"
+                  }
+                ]
+              },
+              {
+                "id": "good_place",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "caring_for_couriers_tea",
+                "name": "Чай",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "petfriendly",
+                "name": "посещение с животными",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "allowed_with_cats_and_dogs",
+                    "name": "разрешено с кошками и собаками"
+                  }
+                ]
+              },
+              {
+                "id": "payment_method",
+                "name": "способ оплаты",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "payment_card",
+                    "name": "оплата картой"
+                  },
+                  {
+                    "id": "cash",
+                    "name": "наличными"
+                  }
+                ]
+              },
+              {
+                "id": "caring_for_couriers_coffee",
+                "name": "Кофе",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "wheelchair_accessability",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "music",
+                "name": "музыка",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "world_music",
+                    "name": "этника"
+                  },
+                  {
+                    "id": "electronic_music",
+                    "name": "электронная"
+                  }
+                ]
+              },
+              {
+                "id": "promotions",
+                "name": "акции",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "bonuses",
+                    "name": "бонусы"
+                  },
+                  {
+                    "id": "promotions",
+                    "name": "акции"
+                  },
+                  {
+                    "id": "special_offers",
+                    "name": "спецпредложения"
+                  }
+                ]
+              },
+              {
+                "id": "caring_for_couriers_charging_station",
+                "name": "Зарядка для телефона",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "caring_for_couriers_rest_area",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "online_takeaway",
+                "name": "Предзаказ онлайн",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "toilet",
+                "name": "туалет",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "caring_for_couriers_wc",
+                "name": "WC",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "preliminary_registration",
+                "name": "предварительная запись",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "booking_by_alice",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "food_court1",
+                "name": "расположен в фудкорте",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "elevator_wheelchair_accessible",
+                "name": "лифт",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "possible_with_laptop",
+                "name": "можно с ноутбуком",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "payment_by_credit_card",
+                "name": "Оплата картой",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "hookah_rental",
+                "name": "аренда кальяна",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "caring_for_couriers_water",
+                "name": "Питьевая вода",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "type_cuisine",
+                "name": "кухня",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "japanese_cuisine",
+                    "name": "японская"
+                  },
+                  {
+                    "id": "authors_cuisine",
+                    "name": "авторская"
+                  },
+                  {
+                    "id": "chinese_cuisine",
+                    "name": "китайская"
+                  },
+                  {
+                    "id": "pan_asian_cuisine",
+                    "name": "паназиатская"
+                  }
+                ]
+              },
+              {
+                "id": "wheelchair_access",
+                "name": "доступность входа на инвалидной коляске",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "full_access",
+                    "name": "доступно"
+                  }
+                ]
+              },
+              {
+                "id": "adults only",
+                "name": "только для взрослых",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "wi_fi",
+                "name": "Wi-Fi",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "type_public_catering",
+                "name": "тип заведения",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "lounge_bar",
+                    "name": "лаунж-бар"
+                  },
+                  {
+                    "id": "japanese_restaurant",
+                    "name": "японский ресторан"
+                  },
+                  {
+                    "id": "coctail_bar",
+                    "name": "коктейльный бар"
+                  },
+                  {
+                    "id": "wine_cellar",
+                    "name": "винотека"
+                  },
+                  {
+                    "id": "restaurant_in_the_shopping_center",
+                    "name": "ресторан в ТЦ"
+                  }
+                ]
+              },
+              {
+                "id": "wheelchair_accessible_vocabulary",
+                "name": "доступность помещения на инвалидной коляске",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "wheelchair_accessible_pa",
+                    "name": "частично доступно"
+                  }
+                ]
+              },
+              {
+                "id": "features_institution",
+                "name": "особенности заведения",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "menu_in_english",
+                    "name": "меню на английском"
+                  },
+                  {
+                    "id": "animal_friendly",
+                    "name": "можно с животными"
+                  },
+                  {
+                    "id": "bar_counter",
+                    "name": "барная стойка"
+                  },
+                  {
+                    "id": "allowed_with_a_laptop",
+                    "name": "можно с ноутбуком"
+                  },
+                  {
+                    "id": "board_games1",
+                    "name": "настольные игры"
+                  },
+                  {
+                    "id": "vinotheque",
+                    "name": "винная карта"
+                  }
+                ]
+              },
+              {
+                "id": "dimmed_lights",
+                "name": "приглушенный свет",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "types_of_delivery",
+                "name": "доставка еды",
+                "type": "enum",
+                "value": [
+                  {
+                    "id": "no_by_default",
+                    "name": "нет по умолчанию"
+                  }
+                ]
+              },
+              {
+                "id": "number_of_tables",
+                "name": "количество столов в зале для посадки",
+                "type": "text",
+                "value": "1–23"
+              },
+              {
+                "id": "show_briefly_about_the_place_block",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "kondicioner",
+                "name": "кондиционер",
+                "type": "bool",
+                "value": true
+              },
+              {
+                "id": "table_games",
+                "name": "настольные игры",
+                "type": "bool",
+                "value": true
+              }
+            ],
+            "aspects": [
+              {
+                "id": "3502044054",
+                "text": "Кальян",
+                "count": 108,
+                "positive": 97,
+                "neutral": 1,
+                "negative": 10
+              },
+              {
+                "id": "3502044050",
+                "text": "Персонал",
+                "count": 95,
+                "positive": 73,
+                "neutral": 14,
+                "negative": 8
+              },
+              {
+                "id": "3502044230",
+                "text": "Атмосфера",
+                "count": 82,
+                "positive": 79,
+                "neutral": 1,
+                "negative": 2
+              },
+              {
+                "id": "3502043730",
+                "text": "Интерьер",
+                "count": 74,
+                "positive": 73,
+                "neutral": 0,
+                "negative": 1
+              },
+              {
+                "id": "3502043738",
+                "text": "Еда",
+                "count": 50,
+                "positive": 45,
+                "neutral": 4,
+                "negative": 1
+              },
+              {
+                "id": "3502044028",
+                "text": "Напитки",
+                "count": 42,
+                "positive": 37,
+                "neutral": 4,
+                "negative": 1
+              },
+              {
+                "id": "3502044248",
+                "text": "Кухня",
+                "count": 37,
+                "positive": 34,
+                "neutral": 2,
+                "negative": 1
+              },
+              {
+                "id": "3502044930",
+                "text": "Чай",
+                "count": 18,
+                "positive": 17,
+                "neutral": 1,
+                "negative": 0
+              },
+              {
+                "id": "3502044686",
+                "text": "Время ожидания",
+                "count": 11,
+                "positive": 7,
+                "neutral": 0,
+                "negative": 4
+              }
+            ],
+            "reviewResults": {
+              "reviews": [
+                {
+                  "reviewId": "Ru8ObgJ_Hqe0wXvfELRJvofz1opOPy",
+                  "rating": 5
+                },
+                {
+                  "reviewId": "Y_OB5wAyktzDtmAv5EbaFmNGI7NreI",
+                  "rating": 5
+                },
+                {
+                  "reviewId": "vegpUBCMyOWH6xMr-Qih5YjbUCmjK7R",
+                  "rating": 5
+                }
+              ]
+            },
+            "topObjects": {
+              "rubric": "food",
+              "categories": [
+                {
+                  "categoryName": "popular",
+                  "categoryItems": [
+                    {
+                      "title": "Ролл с опалённым лососем"
+                    },
+                    {
+                      "title": "Nutella чизкейк"
+                    },
+                    {
+                      "title": "Коктейль \"СВЕТ\" (АКАРИ)"
+                    },
+                    {
+                      "title": "Шеф микс «Созерцание Сада Камней»"
+                    },
+                    {
+                      "title": "Шеф микс «Танец Самурайского Клинка»"
+                    },
+                    {
+                      "title": "Шеф микс «Шёпот Сада Мхов»"
+                    },
+                    {
+                      "title": "Шеф микс «Холод Лунного Света»"
+                    },
+                    {
+                      "title": "Шеф микс «Тень Старого Кедра»"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

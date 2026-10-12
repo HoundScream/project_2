@@ -1,0 +1,55 @@
+{
+  "name": "login_existing_user",
+  "description": "Регистрация пользователя, выход из аккаунта и повторный вход тем же email/паролем — проверяет, что логин действительно открывает именно свой кабинет.",
+  "vars": {},
+  "steps": [
+    {
+      "name": "Зарегистрировать пользователя, которым будем логиниться",
+      "action": "fill_form",
+      "path": "/register",
+      "fields": {
+        "full_name": "{{random.full_name}}",
+        "phone": "{{random.phone}}",
+        "telegram_handle": "{{random.telegram}}",
+        "email": "{{random.email}}",
+        "password": "{{random.password}}"
+      },
+      "expect_status": 303,
+      "expect_redirect_contains": "/register/success/",
+      "capture": {
+        "user_id": "/register/success/"
+      }
+    },
+    {
+      "name": "Выйти из аккаунта",
+      "action": "navigate",
+      "path": "/logout",
+      "expect_status": 303
+    },
+    {
+      "name": "Кабинет без сессии редиректит на логин",
+      "action": "navigate",
+      "path": "/cabinet/{{user_id}}",
+      "expect_status": 303,
+      "expect_redirect_contains": "/login"
+    },
+    {
+      "name": "Войти тем же email и паролем",
+      "action": "fill_form",
+      "path": "/login",
+      "fields": {
+        "identifier": "{{random.email}}",
+        "password": "{{random.password}}"
+      },
+      "expect_status": 303,
+      "expect_redirect_contains": "/cabinet/{{user_id}}"
+    },
+    {
+      "name": "После логина кабинет снова открывается",
+      "action": "navigate",
+      "path": "/cabinet/{{user_id}}",
+      "expect_status": 200,
+      "expect_text": ["Бесплатный кабинет Geonetix"]
+    }
+  ]
+}

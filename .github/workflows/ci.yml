@@ -1,0 +1,128 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  # Pin comes from rust-toolchain.toml; rustup installs it on first use.
+
+jobs:
+  checks:
+    name: fmt + clippy + check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - name: Install pinned toolchain
+        run: rustup show active-toolchain
+
+      - name: Formatting
+        run: cargo fmt --all -- --check
+
+      # dead_code is allowed on purpose: several struct fields mirror rows
+      # selected from PostgreSQL (AnalysisStatusRecord, QueryAnalysis) and
+      # stage_label_from_key is reserved for the upcoming user-facing pages.
+      # Removing them would break the DB mapping, so they are not linted.
+      - name: Clippy
+        run: cargo clippy --locked --workspace --all-targets -- -D warnings -A dead_code
+
+      - name: Check
+        run: cargo check --locked --workspace --all-targets
+
+  unit-tests:
+    name: unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      # Library crates first (parser fixtures included), then the app's own
+      # lib tests. The app's tests/run_scenarios.rs needs a live server and
+      # runs in the e2e job below.
+      - name: Library crate tests
+        run: cargo test --locked --workspace --exclude geonetix
+
+      - name: Application lib tests
+        run: cargo test --locked -p geonetix --lib
+
+  e2e:
+    name: e2e scenarios
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: geonetix
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d geonetix"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+      redis:
+        image: redis:7.4-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    env:
+      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/geonetix
+      REDIS_URL: redis://127.0.0.1:6379
+      GEONETIX_TEST_BASE_URL: http://127.0.0.1:8080
+      # Browser worker stays off: the runner has no Chromium and the
+      # application falls back to a direct HTTP fetch of the card.
+      GEONETIX_BROWSER_WORKER_ENABLED: "0"
+      RUST_LOG: info
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - name: Build
+        run: cargo build --locked --bins
+
+      - name: Start application
+        run: |
+          nohup ./target/debug/geonetix > /tmp/app.log 2>&1 &
+          echo "started pid $!"
+
+      - name: Wait for health
+        run: |
+          for _ in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:8080/health > /dev/null; then
+              echo "application is healthy"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "application never became healthy"
+          tail -50 /tmp/app.log
+          exit 1
+
+      - name: Run scenario suite
+        run: cargo test --locked --test run_scenarios
+
+      - name: Application log on failure
+        if: failure()
+        run: tail -100 /tmp/app.log

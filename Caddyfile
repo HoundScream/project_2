@@ -1,0 +1,15 @@
+{
+    email {$CADDY_EMAIL}
+    admin off
+}
+
+{$CADDY_DOMAIN} {
+    encode zstd gzip
+
+    reverse_proxy app:{$APP_PORT}
+
+    log {
+        output stdout
+        format console
+    }
+}

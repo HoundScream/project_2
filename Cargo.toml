@@ -1,0 +1,46 @@
+[workspace]
+members = [
+    "crates/geonetix-core",
+    "crates/geonetix-parse-jsonld",
+    "crates/geonetix-parse-yandex",
+]
+
+[package]
+name = "geonetix"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "geonetix"
+path = "src/lib.rs"
+
+[[bin]]
+name = "geonetix"
+path = "src/main.rs"
+
+[[bin]]
+name = "scenario-runner"
+path = "src/bin/scenario_runner.rs"
+
+[dependencies]
+geonetix-core = { path = "crates/geonetix-core" }
+geonetix-parse-jsonld = { path = "crates/geonetix-parse-jsonld" }
+geonetix-parse-yandex = { path = "crates/geonetix-parse-yandex" }
+anyhow = "1.0"
+argon2 = "0.5"
+axum = "0.8"
+bytes = "1"
+dotenvy = "0.15"
+rand_core = { version = "0.6", features = ["getrandom"] }
+scraper = "0.24"
+serde_json = "1"
+sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "macros", "migrate", "uuid", "chrono"] }
+tokio = { version = "1.48", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+redis = { version = "0.27", default-features = false, features = ["tokio-comp", "connection-manager"] }
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "cookies"] }
+url = "2.5"
+uuid = { version = "1", features = ["serde", "v4"] }
+
+[dev-dependencies]
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "cookies", "json"] }
